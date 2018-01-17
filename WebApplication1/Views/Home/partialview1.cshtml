@@ -1,0 +1,18 @@
+﻿
+
+@if (ViewData["BackgroundData"] != null)
+{
+
+    <option selected></option>
+
+    @foreach (var item in ViewData["BackgroundData"] as List<AutoTestResults>)
+    {
+
+
+
+        <option id="@item.Sno" value="@item.CreateDate">@item.CreateDate</option>
+
+
+    }
+
+}

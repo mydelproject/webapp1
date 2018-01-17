@@ -1,0 +1,178 @@
+﻿@model List<AutoTestNameRefData>
+@{
+    ViewData["Title"] = "ExecuteScript";
+
+    //  ViewData["ScriptNameList"] = new List<AutoTestResults>();
+}
+
+@{
+    ViewData["Title"] = "ExecuteScript";
+}
+
+<script src="~/lib/jquery/dist/jquery-3.2.1.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/moment.js"></script>
+<script src="~/js/moment.js"></script>
+<link href="~/lib/bootstrap/dist/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+<script src="~/lib/bootstrap/dist/js/bootstrap-datetimepicker.min.js"></script>
+<script>
+
+
+
+    function getval(value) {
+        document.getElementsByTagName("select")["inputGroupSelect01"].setAttribute("name", value);
+
+
+    }
+    function getcheckval(value) {
+        var chkBox = document.getElementById('Check1');
+        if (chkBox.checked) {
+            document.getElementsByTagName("input")["Check1"].setAttribute("name", "Checked");
+        }
+        else {
+            document.getElementsByTagName("input")["Check1"].setAttribute("name", "unChecked");
+        }
+        
+
+
+
+    }
+
+    $(document).ready(function () {
+        $("#TestTime").focusout(function () {
+            var value = $("#TestTime").val();
+            document.getElementsByTagName("input")["TestTime"].setAttribute("name", value);
+        });
+        $("#TestTime").change(function () {
+            var value = $("#TestTime").val();
+            document.getElementsByTagName("input")["TestTime"].setAttribute("name", value);
+        });
+        $("#TestTime").focusin(function () {
+            var value = $("#TestTime").val();
+            
+           
+            document.getElementsByTagName("input")["TestTime"].setAttribute("name", value);
+        });
+
+        
+       
+    });
+
+</script>
+<center>
+    <h2>Execute Test </h2>
+</center>
+<div class="container">
+    <div class="row">
+        <form asp-action="InsertScript" asp-controller="Home" method="POST" data-toggle="validator" role="form">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-4 form-group">
+                        <label for="ScriptName">Script Name</label>
+                        <select class="form-control" for="inputGroupSelect01" id="inputGroupSelect01" onchange="getval(this.value)" name="null" required>
+                            <option selected></option>
+                            @foreach (var item in Model)
+            {
+                <option value="@item.ScriptName">@item.ScriptName</option>
+}
+
+                        </select>
+                    </div>
+
+
+                    
+                    <div class='col-md-4 form-group'>
+                        <label for="TestTime">Test Time</label>
+                        <div class='input-group date' id='datetimepicker1'>
+                            
+                            <input type='text' class="form-control"  for="TestTime" id="TestTime"  required />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+
+                    </div>
+                    <script type="text/javascript">
+                        $(function () {
+                            $('#datetimepicker1').datetimepicker();
+                            $('#TestTime').datetimepicker();
+
+                        });
+
+
+
+                    </script>
+
+                    <div class="col-md-1 form-group form-check">
+                        <label class="form-check-label" for="Check1">Execute</label>
+                        <input type="checkbox" name="unChecked" class="form-check-input" id="Check1" onchange="getcheckval(this.value)">
+
+                    </div>
+
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <center>
+                            <button type="submit" class="btn btn-primary">Execute</button>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+
+
+
+        @if (ViewData["ScriptNameList"] != null)
+        {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">SNo</th>
+                        <th scope="col">TestID</th>
+                        <th scope="col">TestScenario</th>
+                        <th scope="col">TestName</th>
+                        <th scope="col">Result</th>
+                        <th scope="col">ScriptName</th>
+                        <th scope="col">CreateDate</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+
+                    @foreach (var item in ViewData["ScriptNameList"] as List<AutoTestResults>)
+                    {
+                        <tr>
+                            <td>
+                                @item.Sno;
+                            </td>
+                            <td>
+                                @item.TestId;
+                            </td>
+                            <td>
+                                @item.TestScenario;
+                            </td>
+                            <td>
+                                @item.TestName;
+                            </td>
+                            <td>
+                                @item.Result;
+                            </td>
+                            <td>
+                                @item.ScriptName;
+                            </td>
+                            <td>
+                                @item.CreateDate;
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+
+        }
+
+    </div>
+</div>
+
+

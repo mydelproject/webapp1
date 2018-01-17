@@ -1,0 +1,108 @@
+﻿@model List<AutoTestResults>
+@{
+    ViewData["Title"] = "ExecuteScript";
+
+    //  ViewData["ScriptNameList"] = new List<AutoTestResults>();
+}
+
+@{
+    ViewData["Title"] = "ExecuteScript";
+}
+
+<div class="container">
+    <div class="row">
+        <form asp-action="InsertScript" asp-controller="Home" method="post" asp-route-id="TestScript_Single">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-4 form-group">
+                        <label for="ScriptName">Script Name</label>
+                        <select class="form-control" for="inputGroupSelect01" id="inputGroupSelect01">
+                            <option selected>Choose...</option>
+                            @foreach (var item in Model)
+            {
+                <option value="@item.ScriptName">@item.ScriptName</option>
+}
+
+                        </select>
+                    </div>
+
+
+                    <div class="col-md-4 form-group">
+                        <label for="TestTime">Test Time</label>
+                        <input type="text" class="form-control" id="TestTime" form="TestTime">
+                    </div>
+
+                    <div class="col-md-1 form-group">
+                        <label class="form-check-label" for="Check1">Execute</label>
+                        <input type="checkbox" class="form-check-input" id="Check1">
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <center>
+                        <button type="submit" class="btn btn-primary">Execute</button>
+                    </center>
+                </div>
+            </div>
+
+        </form>
+
+
+
+
+        @if (ViewData["ScriptNameList"] != null)
+        {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">SNo</th>
+                        <th scope="col">TestID</th>
+                        <th scope="col">TestScenario</th>
+                        <th scope="col">TestName</th>
+                        <th scope="col">Result</th>
+                        <th scope="col">ScriptName</th>
+                        <th scope="col">CreateDate</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+
+                    @foreach (var item in ViewData["ScriptNameList"] as List<AutoTestResults>)
+                    {
+                        <tr>
+                            <td>
+                                @item.Sno;
+                            </td>
+                            <td>
+                                @item.TestId;
+                            </td>
+                            <td>
+                                @item.TestScenario;
+                            </td>
+                            <td>
+                                @item.TestName;
+                            </td>
+                            <td>
+                                @item.Result;
+                            </td>
+                            <td>
+                                @item.ScriptName;
+                            </td>
+                            <td>
+                                @item.CreateDate;
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+
+        }
+
+    </div>
+</div>
+

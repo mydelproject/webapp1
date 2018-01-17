@@ -1,0 +1,65 @@
+﻿@model IEnumerable<WebApplication1.Models.AutoTestResults>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TestId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TestScenario)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TestName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Result)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ScriptName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateDate)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TestId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TestScenario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TestName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Result)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ScriptName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateDate)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Sno">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Sno">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Sno">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
